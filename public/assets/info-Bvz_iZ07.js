@@ -1,0 +1,1 @@
+import{Tr as e,t}from"./jsx-runtime-NwRKtVrk.js";import{t as n}from"./button-CM-rzMOH.js";import{t as r}from"./card-IEtryd1_.js";import{t as i}from"./result-C9ArRkbL.js";e();var a=t(),o=()=>(0,a.jsx)(r,{variant:`borderless`,children:(0,a.jsx)(i,{title:`Your operation has been executed`,extra:(0,a.jsx)(n,{type:`primary`,children:`Go Console`},`console`)})});export{o as default};

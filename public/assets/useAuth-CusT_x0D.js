@@ -1,0 +1,1 @@
+import{c as e}from"./index-DnttQrrj.js";function t(){let t=e(e=>e.access);return{auth:e=>t.includes(e)}}export{t};

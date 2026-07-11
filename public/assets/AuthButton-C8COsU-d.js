@@ -1,1 +1,0 @@
-import{Or as e,Tr as t,t as n}from"./jsx-runtime-NwRKtVrk.js";import{c as r}from"./index-fDz_80MA.js";var i=e(t(),1),a=n(),o=({auth:e,children:t})=>{let n=r(e=>e.access);return(0,i.useMemo)(()=>e?n.includes(e):!0,[n,e])?(0,a.jsx)(a.Fragment,{children:t}):null};export{o as t};
