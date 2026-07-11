@@ -43,7 +43,7 @@ const InfoTab = () => {
         <Avatar size={120} src={userInfo?.avatar_url} className="mb-4 border-2 border-gray-200" />
         <Upload
           name="file"
-          action={`${import.meta.env.VITE_BASE_URL}/admin/uploadAvatar`}
+          action={`${import.meta.env.VITE_BASE_URL}/system/uploadAvatar`}
           headers={{ Authorization: `Bearer ${localStorage.getItem('token')}` }}
           showUploadList={false}
           onChange={uploadChange}
