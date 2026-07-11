@@ -2,11 +2,13 @@
 
 namespace Modules\SystemTool\Http\Requests;
 
+use Illuminate\Validation\Rules\Exists;
 use Modules\Common\Http\Requests\BaseFormRequest;
-use Modules\SystemTool\Models\SysConfigItemsModel;
-use Modules\SystemTool\Rules\ConfigTypeRule;
+use Modules\SystemTool\Models\SysSiteConfigGroupModel;
+use Modules\SystemTool\Models\SysSiteConfigItemsModel;
+use Modules\SystemTool\Rules\SysSiteConfigTypeRule;
 
-class SysConfigItemsFormRequest extends BaseFormRequest
+class SysSiteConfigItemsFormRequest extends BaseFormRequest
 {
     protected $stopOnFirstFailure = true;
 
@@ -15,8 +17,8 @@ class SysConfigItemsFormRequest extends BaseFormRequest
         $rules = [
             'title' => 'required|string',
             'key' => ['required', 'string', 'min:2', 'max:255'],
-            'group_id' => 'required|exists:sys_config_group,id',
-            'type' => ['required', 'string', new ConfigTypeRule],
+            'group_id' => ['required', 'integer', new Exists(SysSiteConfigGroupModel::class, 'id')],
+            'type' => ['required', 'string', new SysSiteConfigTypeRule],
             'describe' => 'nullable|string',
             'options' => [
                 'sometimes',
@@ -37,7 +39,7 @@ class SysConfigItemsFormRequest extends BaseFormRequest
         if (!$this->isUpdate()) {
             $rules['key'][] = function ($attribute, $value, $fail) {
                 $groupId = $this->input('group_id');
-                $exists = SysConfigItemsModel::query()
+                $exists = SysSiteConfigItemsModel::query()
                     ->where('group_id', $groupId)
                     ->where('key', $value)
                     ->exists();

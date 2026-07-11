@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        if (! Schema::hasTable('sys_config_items')) {
-            Schema::create('sys_config_items', function (Blueprint $table) {
+        if (! Schema::hasTable('sys_site_config_items')) {
+            Schema::create('sys_site_config_items', function (Blueprint $table) {
                 $table->bigIncrements('id');
                 $table->string('key', 50)->comment('设置项标示');
                 $table->string('title', 50)->comment('设置标题');
@@ -28,8 +28,8 @@ return new class extends Migration
                 $table->unique(['key', 'group_id']);
             });
         }
-        if (! Schema::hasTable('sys_config_group')) {
-            Schema::create('sys_config_group', function (Blueprint $table) {
+        if (! Schema::hasTable('sys_site_config_group')) {
+            Schema::create('sys_site_config_group', function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('title', 50)->comment('分组标题');
                 $table->string('key', 50)->comment('分组KEY');
@@ -45,7 +45,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('sys_config_items');
-        Schema::dropIfExists('sys_config_group');
+        Schema::dropIfExists('sys_site_config_items');
+        Schema::dropIfExists('sys_site_config_group');
     }
 };

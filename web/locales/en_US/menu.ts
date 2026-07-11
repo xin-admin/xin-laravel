@@ -42,7 +42,7 @@ export default {
   "menu.system.dict": "Dictionaries",
   "menu.system.mail": "Mail",
   "menu.system.storage": "Storage",
-  "menu.system.config": "Configuration",
+  "menu.system.config": "Site Config",
   "menu.system.ai": "AI",
   "menu.xin-admin": "XinAdmin",
 }

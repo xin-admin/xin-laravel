@@ -1,15 +1,17 @@
 <?php
 namespace Modules\SystemTool\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Modules\SystemTool\Enum\SiteConfigType;
 
 /**
  * Class Setting
  */
-class SysConfigItemsModel extends Model
+class SysSiteConfigItemsModel extends Model
 {
-    protected $table = 'sys_config_items';
+    protected $table = 'sys_site_config_items';
 
     protected $casts = [
         'group_id' => 'int',
@@ -36,7 +38,22 @@ class SysConfigItemsModel extends Model
      */
     public function group(): BelongsTo
     {
-        return $this->belongsTo(SysConfigGroupModel::class, 'id', 'group_id');
+        return $this->belongsTo(SysSiteConfigGroupModel::class, 'id', 'group_id');
+    }
+
+
+    protected function values(): Attribute
+    {
+        return Attribute::make(
+            get: function (mixed $value, array $attributes) {
+                $type_enum = SiteConfigType::tryFrom($attributes['type']);
+                if($type_enum) {
+                    return $type_enum->castValue($value);
+                } else {
+                    return $value;
+                }
+            },
+        );
     }
 
     public function getOptionsJsonAttribute(): string

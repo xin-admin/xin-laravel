@@ -14,10 +14,10 @@ class SysDataSeeder extends Seeder
     {
         $date = date('Y-m-d H:i:s');
         // 系统设置初始数据
-        DB::table('sys_config_group')->insert([
+        DB::table('sys_site_config_group')->insert([
              ['id' => 1, 'title' => '网站设置', 'key' => 'web', 'remark' => '网站基础设置', 'created_at' => $date, 'updated_at' => $date]
         ]);
-        DB::table('sys_config_items')->insert([
+        DB::table('sys_site_config_items')->insert([
             ['id' => 1, 'group_id' => 1, 'key' => 'title', 'title' => '网站标题', 'describe' => '网站标题，用于展示在网站logo旁边和登录页面以及网页title中', 'values' => 'Xin Admin', 'type' => 'Input','options' => "", 'sort' => 0, 'created_at' => $date, 'updated_at' => $date,],
             ['id' => 2, 'group_id' => 1, 'key' => 'logo', 'title' => '网站LOGO', 'describe' => '网站的LOGO，用于标识网站', 'values' => 'https://file.xinadmin.cn/file/favicons.ico', 'type' => 'Input','options' => "", 'sort' => 1, 'created_at' => $date, 'updated_at' => $date,],
             ['id' => 3, 'group_id' => 1, 'key' => 'subtitle', 'title' => '网站副标题', 'describe' => '网站副标题，展示在登录页面标题的下面', 'values' => 'Xin Admin 快速开发框架', 'type' => 'Input','options' => "", 'sort' => 2, 'created_at' => $date, 'updated_at' => $date,],

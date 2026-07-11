@@ -11,15 +11,15 @@ use Modules\AnnoRoute\Attribute\PostRoute;
 use Modules\AnnoRoute\Attribute\PutRoute;
 use Modules\AnnoRoute\Attribute\RequestAttribute;
 use Modules\Common\Http\Controllers\BaseController;
-use Modules\SystemTool\Http\Requests\SysConfigItemsFormRequest;
-use Modules\SystemTool\Models\SysConfigItemsModel;
-use Modules\SystemTool\Services\SysConfigService;
+use Modules\SystemTool\Http\Requests\SysSiteConfigItemsFormRequest;
+use Modules\SystemTool\Models\SysSiteConfigItemsModel;
+use Modules\SystemTool\Services\SysSiteConfigService;
 
 /**
  * 系统设置
  */
 #[RequestAttribute('/system/config/items', 'system.config.items')]
-class SysConfigItemsController extends BaseController
+class SysSiteConfigItemsController extends BaseController
 {
     protected array $searchField = [
         'group_id' => '=',
@@ -33,7 +33,7 @@ class SysConfigItemsController extends BaseController
         if (empty($params['group_id'])) {
             throw new RepositoryException('请选择设置分组');
         }
-        $query = SysConfigItemsModel::query();
+        $query = SysSiteConfigItemsModel::query();
         $data = $this->buildSearch($params, $query)
             ->orderBy('sort', 'desc')
             ->get()
@@ -43,10 +43,10 @@ class SysConfigItemsController extends BaseController
 
     /** 创建设置项 */
     #[PostRoute(authorize: 'create')]
-    public function create(SysConfigItemsFormRequest $request): JsonResponse
+    public function create(SysSiteConfigItemsFormRequest $request): JsonResponse
     {
         $validated = $request->validated();
-        $model = SysConfigItemsModel::create($validated);
+        $model = SysSiteConfigItemsModel::create($validated);
         if (empty($model)) {
             return $this->error();
         }
@@ -59,10 +59,10 @@ class SysConfigItemsController extends BaseController
         authorize: 'update',
         where: ['id' => '[0-9]+']
     )]
-    public function update(int $id, SysConfigItemsFormRequest $request): JsonResponse
+    public function update(int $id, SysSiteConfigItemsFormRequest $request): JsonResponse
     {
         $validated = $request->validated();
-        $model = SysConfigItemsModel::find($id);
+        $model = SysSiteConfigItemsModel::find($id);
         if (empty($model)) {
             return $this->error();
         }
@@ -78,7 +78,7 @@ class SysConfigItemsController extends BaseController
     )]
     public function delete(int $id): JsonResponse
     {
-        $model = SysConfigItemsModel::find($id);
+        $model = SysSiteConfigItemsModel::find($id);
         if (empty($model)) {
             return $this->error();
         }
@@ -95,24 +95,21 @@ class SysConfigItemsController extends BaseController
             return $this->error('请提供设置数据');
         }
 
-        $result = SysConfigService::batchSetConfig($configs);
+        $result = SysSiteConfigService::batchSaveSiteConfig($configs);
 
         if ($result['success']) {
-            SysConfigService::refreshConfig();
-            return $this->success('保存成功');
+            SysSiteConfigService::refreshSiteConfig();
+            return $this->success();
         }
-
-        // 收集失败项的名称用于提示
-        $failedTitles = array_column($result['errors'], 'title');
-        $message = '部分设置保存失败：' . implode('、', $failedTitles);
-        return $this->success(['errors' => $result['errors']], $message);
+        $message = '设置保存失败：' . $result['message'];
+        return $this->error($message);
     }
 
     /** 刷新设置 */
     #[PostRoute('/refreshCache', 'refresh')]
     public function refreshCache(): JsonResponse
     {
-        SysConfigService::refreshConfig();
-        return $this->success('重载成功');
+        SysSiteConfigService::refreshSiteConfig();
+        return $this->success();
     }
 }

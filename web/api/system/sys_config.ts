@@ -79,3 +79,11 @@ export async function saveConfigItems(configs: { id: number; value: string }[]) 
     data: { configs },
   });
 }
+
+/** 刷新设置缓存 */
+export async function refreshCache() {
+  return createAxios({
+    url: '/system/config/items/refreshCache',
+    method: 'post'
+  });
+}

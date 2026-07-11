@@ -18,7 +18,14 @@ import {
   Switch,
   Typography,
 } from 'antd';
-import {DeleteOutlined, EditOutlined, PlusOutlined, SaveOutlined, SettingOutlined,} from '@ant-design/icons';
+import {
+  DeleteOutlined,
+  EditOutlined,
+  PlusOutlined,
+  ReloadOutlined,
+  SaveOutlined,
+  SettingOutlined,
+} from '@ant-design/icons';
 import XinForm from '@/components/XinForm';
 import type { XinFormRef } from '@/components/XinForm/typings';
 import type { FormColumn } from '@/components/XinFormField/FieldRender/typings';
@@ -31,7 +38,7 @@ import {
   deleteConfigGroup,
   deleteConfigItem,
   getConfigGroupList,
-  getConfigItemList,
+  getConfigItemList, refreshCache,
   saveConfigItems,
   updateConfigGroup,
   updateConfigItem,
@@ -263,6 +270,16 @@ const ConfigManagement: React.FC = () => {
     }
   };
 
+  const handleRefresh = async () => {
+    try {
+      setSaving(true);
+      await refreshCache();
+      message.success(t('system.config.item.refreshCacheSuccess'))
+    } finally {
+      setSaving(false);
+    }
+  }
+
   /** 渲染设置项的表单组件 */
   const renderConfigItemComponent = (item: IConfigItem) => {
     const fieldName = `item_${item.id}`;
@@ -422,6 +439,7 @@ const ConfigManagement: React.FC = () => {
       title: t('system.config.item.field.sort'),
       dataIndex: 'sort',
       valueType: 'digit',
+      initialValue: 0
     },
     {
       title: t('system.config.item.field.describe'),
@@ -539,6 +557,13 @@ const ConfigManagement: React.FC = () => {
           extra={
             selectedGroupId && (
               <Space>
+                <Button
+                  type="primary"
+                  icon={<ReloadOutlined />}
+                  onClick={handleRefresh}
+                >
+                  {t('system.config.refresh.button')}
+                </Button>
                 <Button
                   type="primary"
                   icon={<SaveOutlined />}

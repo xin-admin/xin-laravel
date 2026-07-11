@@ -1,6 +1,6 @@
 <?php
 
-use Modules\SystemTool\Services\SysConfigService;
+use Modules\SystemTool\Services\SysSiteConfigService;
 
 if (! function_exists('site_config')) {
     /**
@@ -18,7 +18,7 @@ if (! function_exists('site_config')) {
      */
     function site_config(?string $name = null, mixed $default = null): mixed
     {
-        return SysConfigService::getConfig($name, $default);
+        return SysSiteConfigService::getSiteConfig($name, $default);
     }
 }
 

@@ -36,15 +36,16 @@ export default {
   'system.config.item.field.type': 'Component Type',
   'system.config.item.field.type.required': 'Please select component type',
   'system.config.item.field.describe': 'Description',
-  'system.config.item.field.options': 'Options (JSON Array)',
-  'system.config.item.field.options.tooltip': 'Example: 1=Option1 /n 2=Option2',
-  'system.config.item.field.props': 'Properties (JSON Object)',
-  'system.config.item.field.props.tooltip': 'Example: placeholder=Please input /n maxLength=100',
+  "system.config.item.field.options": "Options",
+  "system.config.item.field.options.tooltip": "Options for components such as radio buttons and checkboxes, e.g.: 1=Option 1 /n 2=Option 2",
+  "system.config.item.field.props": "Properties",
+  "system.config.item.field.props.tooltip": "Component configuration, supporting simple settings, e.g.: placeholder=Please enter /n maxLength=100",
   'system.config.item.field.values': 'Default Value',
   'system.config.item.field.sort': 'Sort',
   'system.config.item.createSuccess': 'Config item created successfully',
   'system.config.item.updateSuccess': 'Config item updated successfully',
   'system.config.item.deleteSuccess': 'Config item deleted successfully',
+  'system.config.item.refreshCacheSuccess': 'refresh cache successfully',
 
   // Form component types
   'system.config.component.Input': 'Input',
@@ -61,9 +62,7 @@ export default {
 
   // Operation prompts
   'system.config.save.button': 'Save',
-  'system.config.save.success': 'Saved successfully',
-  'system.config.save.error': 'Save failed',
-  'system.config.save.partialWarning': 'Partial save: {names} failed',
+  'system.config.refresh.button': 'Refresh Cache',
   'system.config.confirm.ok': 'Confirm',
   'system.config.confirm.cancel': 'Cancel',
 };

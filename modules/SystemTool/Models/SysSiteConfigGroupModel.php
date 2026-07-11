@@ -5,11 +5,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
- * Class SettingGroup
+ * Class SiteConfig Group
  */
-class SysConfigGroupModel extends Model
+class SysSiteConfigGroupModel extends Model
 {
-    protected $table = 'sys_config_group';
+    protected $table = 'sys_site_config_group';
 
     protected $fillable = [
         'title',
@@ -21,9 +21,9 @@ class SysConfigGroupModel extends Model
      * 关联设置项目
      * @return HasMany
      */
-    public function settings(): HasMany
+    public function configs(): HasMany
     {
-        return $this->hasMany(SysConfigItemsModel::class ,'group_id', 'id');
+        return $this->hasMany(SysSiteConfigItemsModel::class ,'group_id', 'id');
     }
 
 }

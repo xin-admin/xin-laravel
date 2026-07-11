@@ -36,15 +36,16 @@ export default {
   "system.config.item.field.type": "组件类型",
   "system.config.item.field.type.required": "请选择组件类型",
   "system.config.item.field.describe": "描述",
-  "system.config.item.field.options": "选项(JSON数组)",
-  "system.config.item.field.options.tooltip": "例如: 1=选项1 /n 2=选项2",
-  "system.config.item.field.props": "属性(JSON对象)",
-  "system.config.item.field.props.tooltip": "例如: placeholder=请输入 /n maxLength=100",
+  "system.config.item.field.options": "选项",
+  "system.config.item.field.options.tooltip": "单选、多选等组件的选项，例如: 1=选项1 /n 2=选项2",
+  "system.config.item.field.props": "属性",
+  "system.config.item.field.props.tooltip": "组件的配置，支持简单的配置，例如: placeholder=请输入 /n maxLength=100",
   "system.config.item.field.values": "默认值",
   "system.config.item.field.sort": "排序",
   "system.config.item.createSuccess": "新增设置项成功",
   "system.config.item.updateSuccess": "修改设置项成功",
   "system.config.item.deleteSuccess": "删除设置项成功",
+  "system.config.item.refreshCacheSuccess": "配置缓存刷新成功",
 
   // 表单组件类型
   "system.config.component.Input": "输入框",
@@ -61,9 +62,7 @@ export default {
 
   // 操作提示
   "system.config.save.button": "保存",
-  "system.config.save.success": "保存成功",
-  "system.config.save.error": "保存失败",
-  "system.config.save.partialWarning": "部分保存成功，{names}保存失败",
+  'system.config.refresh.button': '刷新缓存',
   "system.config.confirm.ok": "确认",
   "system.config.confirm.cancel": "取消",
 };

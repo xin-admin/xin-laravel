@@ -11,21 +11,21 @@ use Modules\AnnoRoute\Attribute\PostRoute;
 use Modules\AnnoRoute\Attribute\PutRoute;
 use Modules\AnnoRoute\Attribute\RequestAttribute;
 use Modules\Common\Http\Controllers\BaseController;
-use Modules\SystemTool\Http\Requests\SysConfigGroupFormRequest;
-use Modules\SystemTool\Models\SysConfigGroupModel;
+use Modules\SystemTool\Http\Requests\SysSiteConfigGroupFormRequest;
+use Modules\SystemTool\Models\SysSiteConfigGroupModel;
 
 /**
  * 设置分组控制器
  */
 #[RequestAttribute('/system/config/group', 'system.config.group')]
-class SysConfigGroupController extends BaseController
+class SysSiteConfigGroupController extends BaseController
 {
     /** 查询设置分组列表 */
     #[GetRoute(authorize: 'query')]
     public function query(Request $request): JsonResponse
     {
         $params = $request->all();
-        $query = SysConfigGroupModel::query();
+        $query = SysSiteConfigGroupModel::query();
 
         if (!empty($params['keywordSearch'])) {
             $query->whereAny(
@@ -41,10 +41,10 @@ class SysConfigGroupController extends BaseController
 
     /** 创建设置分组 */
     #[PostRoute(authorize: 'create')]
-    public function create(SysConfigGroupFormRequest $request): JsonResponse
+    public function create(SysSiteConfigGroupFormRequest $request): JsonResponse
     {
         $validated = $request->validated();
-        $model = SysConfigGroupModel::create($validated);
+        $model = SysSiteConfigGroupModel::create($validated);
         if (empty($model)) {
             return $this->error();
         }
@@ -57,10 +57,10 @@ class SysConfigGroupController extends BaseController
         authorize: 'update',
         where: ['id' => '[0-9]+']
     )]
-    public function update(int $id, SysConfigGroupFormRequest $request): JsonResponse
+    public function update(int $id, SysSiteConfigGroupFormRequest $request): JsonResponse
     {
         $validated = $request->validated();
-        $model = SysConfigGroupModel::find($id);
+        $model = SysSiteConfigGroupModel::find($id);
         if (empty($model)) {
             return $this->error();
         }
@@ -76,11 +76,11 @@ class SysConfigGroupController extends BaseController
     )]
     public function delete(int $id): JsonResponse
     {
-        $model = SysConfigGroupModel::find($id);
+        $model = SysSiteConfigGroupModel::find($id);
         if (empty($model)) {
             return $this->error();
         }
-        $count = $model->settings()->count();
+        $count = $model->configs()->count();
         if ($count > 0) {
             throw new RepositoryException('当前分组有未删除的设置项！');
         }

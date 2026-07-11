@@ -8,17 +8,17 @@ Route::get('/', function () {
 
 // IndexController
 Route::controller(App\Http\Controllers\IndexController::class)->prefix('api')->group(function () {
-    Route::get('/index', 'index')->middleware(['auth:sanctum', 'authGuard:users', 'abilities:']);
-    Route::post('/login', 'login')->middleware(['auth:sanctum', 'authGuard:users', 'abilities:']);
-    Route::post('/register', 'register')->middleware(['auth:sanctum', 'authGuard:users', 'abilities:']);
+    Route::get('/index', 'index')->middleware(['auth:sanctum', 'authGuard:users']);
+    Route::post('/login', 'login')->middleware(['auth:sanctum', 'authGuard:users']);
+    Route::post('/register', 'register')->middleware(['auth:sanctum', 'authGuard:users']);
 });
 
 // UserController
 Route::controller(App\Http\Controllers\UserController::class)->prefix('api/user')->group(function () {
-    Route::get('/', 'getUserInfo')->middleware(['auth:sanctum', 'authGuard:users', 'abilities:']);
-    Route::post('/logout', 'logout')->middleware(['auth:sanctum', 'authGuard:users', 'abilities:']);
-    Route::put('/', 'setUserInfo')->middleware(['auth:sanctum', 'authGuard:users', 'abilities:']);
-    Route::post('/setPwd', 'setPassword')->middleware(['auth:sanctum', 'authGuard:users', 'abilities:']);
+    Route::get('/', 'getUserInfo')->middleware(['auth:sanctum', 'authGuard:users']);
+    Route::post('/logout', 'logout')->middleware(['auth:sanctum', 'authGuard:users']);
+    Route::put('/', 'setUserInfo')->middleware(['auth:sanctum', 'authGuard:users']);
+    Route::post('/setPwd', 'setPassword')->middleware(['auth:sanctum', 'authGuard:users']);
 });
 
 // AgentController
@@ -50,24 +50,6 @@ Route::controller(Modules\SystemTool\Http\Controllers\SysAiController::class)->p
     Route::get('/config', 'getConfig')->middleware(['auth:sanctum', 'authGuard', 'abilities:system.ai.config']);
     Route::post('/save', 'saveConfig')->middleware(['auth:sanctum', 'authGuard', 'abilities:system.ai.save']);
     Route::post('/test', 'testConnection')->middleware(['auth:sanctum', 'authGuard', 'abilities:system.ai.test']);
-});
-
-// SysConfigGroupController
-Route::controller(Modules\SystemTool\Http\Controllers\SysConfigGroupController::class)->prefix('system/config/group')->group(function () {
-    Route::get('/', 'query')->middleware(['auth:sanctum', 'authGuard', 'abilities:system.config.group.query']);
-    Route::post('/', 'create')->middleware(['auth:sanctum', 'authGuard', 'abilities:system.config.group.create']);
-    Route::put('/{id}', 'update')->middleware(['auth:sanctum', 'authGuard', 'abilities:system.config.group.update']);
-    Route::delete('/{id}', 'delete')->middleware(['auth:sanctum', 'authGuard', 'abilities:system.config.group.delete']);
-});
-
-// SysConfigItemsController
-Route::controller(Modules\SystemTool\Http\Controllers\SysConfigItemsController::class)->prefix('system/config/items')->group(function () {
-    Route::get('/', 'query')->middleware(['auth:sanctum', 'authGuard', 'abilities:system.config.items.query']);
-    Route::post('/', 'create')->middleware(['auth:sanctum', 'authGuard', 'abilities:system.config.items.create']);
-    Route::put('/{id}', 'update')->middleware(['auth:sanctum', 'authGuard', 'abilities:system.config.items.update']);
-    Route::delete('/{id}', 'delete')->middleware(['auth:sanctum', 'authGuard', 'abilities:system.config.items.delete']);
-    Route::put('/save', 'save')->middleware(['auth:sanctum', 'authGuard', 'abilities:system.config.items.save']);
-    Route::post('/refreshCache', 'refreshCache')->middleware(['auth:sanctum', 'authGuard', 'abilities:system.config.items.refresh']);
 });
 
 // SysDictController
@@ -125,6 +107,24 @@ Route::controller(Modules\SystemTool\Http\Controllers\SysMailController::class)-
     Route::post('/test', 'sendTest')->middleware(['auth:sanctum', 'authGuard', 'abilities:system.mail.test']);
 });
 
+// SysSiteConfigGroupController
+Route::controller(Modules\SystemTool\Http\Controllers\SysSiteConfigGroupController::class)->prefix('system/config/group')->group(function () {
+    Route::get('/', 'query')->middleware(['auth:sanctum', 'authGuard', 'abilities:system.config.group.query']);
+    Route::post('/', 'create')->middleware(['auth:sanctum', 'authGuard', 'abilities:system.config.group.create']);
+    Route::put('/{id}', 'update')->middleware(['auth:sanctum', 'authGuard', 'abilities:system.config.group.update']);
+    Route::delete('/{id}', 'delete')->middleware(['auth:sanctum', 'authGuard', 'abilities:system.config.group.delete']);
+});
+
+// SysSiteConfigItemsController
+Route::controller(Modules\SystemTool\Http\Controllers\SysSiteConfigItemsController::class)->prefix('system/config/items')->group(function () {
+    Route::get('/', 'query')->middleware(['auth:sanctum', 'authGuard', 'abilities:system.config.items.query']);
+    Route::post('/', 'create')->middleware(['auth:sanctum', 'authGuard', 'abilities:system.config.items.create']);
+    Route::put('/{id}', 'update')->middleware(['auth:sanctum', 'authGuard', 'abilities:system.config.items.update']);
+    Route::delete('/{id}', 'delete')->middleware(['auth:sanctum', 'authGuard', 'abilities:system.config.items.delete']);
+    Route::put('/save', 'save')->middleware(['auth:sanctum', 'authGuard', 'abilities:system.config.items.save']);
+    Route::post('/refreshCache', 'refreshCache')->middleware(['auth:sanctum', 'authGuard', 'abilities:system.config.items.refresh']);
+});
+
 // SysStorageController
 Route::controller(Modules\SystemTool\Http\Controllers\SysStorageController::class)->prefix('system/storage')->group(function () {
     Route::get('/config', 'getConfig')->middleware(['auth:sanctum', 'authGuard', 'abilities:system.storage.config']);
@@ -135,13 +135,13 @@ Route::controller(Modules\SystemTool\Http\Controllers\SysStorageController::clas
 // IndexController
 Route::controller(Modules\SystemUser\Http\Controllers\IndexController::class)->prefix('system')->group(function () {
     Route::post('/login', 'login')->middleware(['login_log']);
-    Route::post('/logout', 'logout')->middleware(['auth:sanctum', 'authGuard', 'abilities:']);
-    Route::get('/info', 'info')->middleware(['auth:sanctum', 'authGuard', 'abilities:']);
-    Route::get('/menu', 'menu')->middleware(['auth:sanctum', 'authGuard', 'abilities:']);
-    Route::put('/updateInfo', 'updateInfo')->middleware(['auth:sanctum', 'authGuard', 'abilities:']);
-    Route::put('/updatePassword', 'updatePassword')->middleware(['auth:sanctum', 'authGuard', 'abilities:']);
-    Route::post('/uploadAvatar', 'uploadAvatar')->middleware(['auth:sanctum', 'authGuard', 'abilities:']);
-    Route::get('/loginRecord', 'loginRecord')->middleware(['auth:sanctum', 'authGuard', 'abilities:']);
+    Route::post('/logout', 'logout')->middleware(['auth:sanctum', 'authGuard']);
+    Route::get('/info', 'info')->middleware(['auth:sanctum', 'authGuard']);
+    Route::get('/menu', 'menu')->middleware(['auth:sanctum', 'authGuard']);
+    Route::put('/updateInfo', 'updateInfo')->middleware(['auth:sanctum', 'authGuard']);
+    Route::put('/updatePassword', 'updatePassword')->middleware(['auth:sanctum', 'authGuard']);
+    Route::post('/uploadAvatar', 'uploadAvatar')->middleware(['auth:sanctum', 'authGuard']);
+    Route::get('/loginRecord', 'loginRecord')->middleware(['auth:sanctum', 'authGuard']);
 });
 
 // SysDeptController

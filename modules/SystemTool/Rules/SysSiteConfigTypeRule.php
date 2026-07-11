@@ -7,7 +7,7 @@ use Modules\SystemTool\Enum\SiteConfigType;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Translation\PotentiallyTranslatedString;
 
-class ConfigTypeRule implements ValidationRule
+class SysSiteConfigTypeRule implements ValidationRule
 {
     /**
      * Run the validation rule.

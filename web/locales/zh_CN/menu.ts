@@ -42,7 +42,7 @@ export default {
   "menu.system.dict": "系统字典",
   "menu.system.mail": "邮件配置",
   "menu.system.storage": "存储配置",
-  "menu.system.config": "系统配置",
+  "menu.system.config": "网站配置",
   "menu.system.ai": "AI 配置",
   "menu.xin-admin": "XinAdmin",
 };
