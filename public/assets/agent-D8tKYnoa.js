@@ -1,0 +1,1 @@
+import{t as e}from"./request-Blbag3Ot.js";async function t(){return e({url:`/ai/agent`,method:`get`})}async function n(t){return e({url:`/ai/agent/${t}`,method:`get`})}async function r(t,n){return e({url:`/ai/agent/${t}`,method:`put`,data:n})}export{t as n,r,n as t};

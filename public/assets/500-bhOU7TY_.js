@@ -1,1 +1,0 @@
-import{j as t,B as r}from"./index-B-sDl1ER.js";import{C as s}from"./index-CO5DzGxy.js";import{R as e}from"./index-CwBuiwuD.js";const m=()=>t.jsx(s,{variant:"borderless",children:t.jsx(e,{status:"500",title:"500",subTitle:"Sorry, something went wrong.",extra:t.jsx(r,{type:"primary",children:"Back Home"})})});export{m as default};
