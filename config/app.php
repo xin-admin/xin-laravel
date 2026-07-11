@@ -123,4 +123,13 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Site Config Cache Key
+    |--------------------------------------------------------------------------
+     */
+    'site' => [
+        'cache_key' => env('SETTING_CACHE_KEY', 'xinadmin'),
+    ]
+
 ];

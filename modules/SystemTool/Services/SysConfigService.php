@@ -17,7 +17,7 @@ class SysConfigService
     /**
      * 缓存过期时间（秒），默认30天
      */
-    private const CACHE_TTL = 60 * 60 * 24 * 30;
+    private const int|float CACHE_TTL = 60 * 60 * 24 * 30;
 
     /**
      * 刷新系统设置缓存
@@ -298,6 +298,6 @@ class SysConfigService
      */
     private static function getCacheKey(): string
     {
-        return config('site_config.cache_key', 'site_config');
+        return config('app.site.cache_key', 'xinadmin');
     }
 }
